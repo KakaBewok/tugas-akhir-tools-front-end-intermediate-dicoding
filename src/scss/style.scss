@@ -1,0 +1,63 @@
+@use 'variables' as var;
+@use 'mixins' as mix;
+
+//main bootstrap
+@import "bootstrap/scss/bootstrap";
+
+//roboto font
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+* {
+    font-family: var.$font-primary;
+}
+
+.container {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    &.nav-wrapper {
+        background-color: var.$primary;
+    }
+
+    nav {
+        a {
+            letter-spacing: 0.1em;
+            color: white;
+            transition: color 200ms ease-in;
+            &:hover {
+                color: var.$tertiary;
+            }
+        }
+    }
+
+    main {
+        header {
+            .title {
+                letter-spacing: .1em;
+            }
+        }
+        .content {
+            .grid-container {
+                display: grid;
+                place-items: center;
+                gap: 55px;
+                grid-template-columns: repeat(3, minmax(200px, 1fr));
+            }
+        }
+    }
+
+    &.footer-wrapper {
+        background-color: var.$primary;
+        footer{
+            span {
+                color: white;
+            }
+        }
+       
+    }
+
+    .card {
+        &:hover {
+            @include mix.opacity-animation(0.4s, 0.8);
+        }
+    }
+}
+

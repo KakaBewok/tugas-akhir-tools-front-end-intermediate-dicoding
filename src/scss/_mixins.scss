@@ -1,0 +1,12 @@
+@mixin opacity-animation($duration, $opacity-factor) {
+    animation: opacityAnimation $duration ease-in-out both;
+    cursor: pointer;
+    @keyframes opacityAnimation {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: $opacity-factor;
+      }
+    }
+}

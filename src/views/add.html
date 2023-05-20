@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- navbar -->
+    <section>
+      <div class="container nav-wrapper">
+        <nav class="navbar navbar-expand-lg px-4 mt-5">
+          <a class="navbar-brand fw-bold fs-4" href="#">StoryApp</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav fw-bold">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Add Story</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </section>
+
+    <!-- main -->
+    <section>
+      <div class="container">
+        <main>
+          <div class="wrapper p-4">
+            <header class="d-flex justify-content-between align-items-center">
+              <div class="title">
+                <h3 class="fw-bold fs-4">Add Your Story</h3>
+                <p class="fs-6">Create your sweet memory</p>
+              </div>
+              <div class="button wrapper d-flex align-items-center">
+                <button type="button" class="btn btn-primary fs-6">Dashboard</button>
+              </div>
+            </header>
+            <div class="content my-5">
+              <form class="row g-3 needs-validation" novalidate>
+                <!-- name -->
+                <div class="col-md-12">
+                  <label for="validationCustom01" class="form-label fw-bold">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationCustom01"
+                    value="Mark Zuck"
+                    required
+                  />
+                  <div class="valid-feedback">Valid!</div>
+                </div>
+                <!-- description -->
+                <div class="col-12 col-md-12">
+                  <label for="validationCustomDesc" class="form-label fw-bold">Description</label>
+                  <textarea
+                    id="validationCustomDesc"
+                    class="form-control"
+                    rows="6"
+                    placeholder="Once upon a time ...."
+                    required
+                  ></textarea>
+                  <div class="invalid-feedback">Valid</div>
+                </div>
+                <!-- upload photo -->
+                <div class="col-12 col-md-12">
+                  <label for="validationImage" class="form-label fw-bold">Photo preview</label>
+                  <div style="width: 50%; height: 10rem" class="mb-3">Preview template</div>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="validationImage"
+                    accept="image/*"
+                    required
+                  />
+                </div>
+                <!-- button submit -->
+                <div class="col-12">
+                  <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <section>
+      <div class="container footer-wrapper p-3 mb-5">
+        <footer class="footer d-flex justify-content-center align-items-center">
+          <span>Noprizal - 2023</span>
+        </footer>
+      </div>
+    </section>
+
+    <script>
+      (() => {
+        'use strict';
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation');
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            'submit',
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add('was-validated');
+            },
+            false,
+          );
+        });
+      })();
+    </script>
+  </body>
+</html>
