@@ -4,36 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Story App | Noprizal</title>
   </head>
   <body>
     <!-- navbar -->
     <section>
       <div class="container nav-wrapper">
-        <nav class="navbar navbar-expand-lg px-4 mt-5">
-          <a class="navbar-brand fw-bold fs-4" href="#">StoryApp</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav fw-bold">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Dashboard</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Add Story</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <nav-bar></nav-bar>
       </div>
     </section>
 
@@ -43,44 +20,55 @@
         <main>
           <div class="wrapper p-4">
             <header class="d-flex justify-content-between align-items-center">
-              <div class="title">
-                <h3 class="fw-bold fs-4">Add Your Story</h3>
-                <p class="fs-6">Create your sweet memory</p>
-              </div>
+              <header-title content="Add Story"></header-title>
               <div class="button wrapper d-flex align-items-center">
-                <button type="button" class="btn btn-primary fs-6">Dashboard</button>
+                <button-link to="/" content="Dashboard"></button-link>
               </div>
             </header>
             <div class="content my-5">
-              <form class="row g-3 needs-validation" novalidate>
+              <form class="row g-3 needs-validation" id="addRecordForm" novalidate>
                 <!-- name -->
-                <div class="col-md-12">
-                  <label for="validationCustom01" class="form-label fw-bold">Name</label>
+                <div class="col-12">
+                  <label for="validationName" class="form-label fw-bold">Name</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="validationCustom01"
-                    value="Mark Zuck"
+                    id="validationName"
+                    placeholder="Mark Zuck"
                     required
                   />
-                  <div class="valid-feedback">Valid!</div>
+                  <div class="invalid-feedback">Name is required!</div>
+                  <!-- <div class="valid-feedback">Valid!</div> -->
                 </div>
-                <!-- description -->
-                <div class="col-12 col-md-12">
-                  <label for="validationCustomDesc" class="form-label fw-bold">Description</label>
+                <!-- story -->
+                <div class="col-12">
+                  <label for="validationStory" class="form-label fw-bold">Story</label>
                   <textarea
-                    id="validationCustomDesc"
+                    id="validationStory"
                     class="form-control"
                     rows="6"
                     placeholder="Once upon a time ...."
                     required
+                    style="resize: none"
                   ></textarea>
-                  <div class="invalid-feedback">Valid</div>
+                  <div class="invalid-feedback">Story is required!</div>
+                  <!-- <div class="invalid-feedback">Valid</div> -->
                 </div>
                 <!-- upload photo -->
-                <div class="col-12 col-md-12">
-                  <label for="validationImage" class="form-label fw-bold">Photo preview</label>
-                  <div style="width: 50%; height: 10rem" class="mb-3">Preview template</div>
+                <div class="col-12">
+                  <label for="validationImage" class="form-label fw-bold">Photo</label>
+                  <div style="width: 100%; height: 15rem" class="mb-5">
+                    <img class="img-fluid h-100" src="" alt="Photo Preview" id="templatePreview" />
+                    <div
+                      class="w-100 h-100 d-none"
+                      style="
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: contain;
+                      "
+                      id="validationImageChange"
+                    ></div>
+                  </div>
                   <input
                     type="file"
                     class="form-control"
@@ -88,6 +76,7 @@
                     accept="image/*"
                     required
                   />
+                  <div class="invalid-feedback">Image is required!</div>
                 </div>
                 <!-- button submit -->
                 <div class="col-12">
