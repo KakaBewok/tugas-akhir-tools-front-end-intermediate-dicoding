@@ -24,7 +24,15 @@ class CardStory extends LitNoShadowDom {
     return html`
       <div class="grid-item ${this.class}">
         <div class="card ${this.class}" style="width: 18rem id=${this.id}">
-          <img src=${this.photoUrl} class="card-img-top ${this.class}" alt=${this.name} />
+          <div class="mx-auto" id="loading-img">
+            <span>Loading...</span>
+          </div>
+          <img
+            src=${this.photoUrl}
+            id="card-img"
+            class="card-img-top ${this.class}"
+            alt=${this.name}
+          />
           <div class="card-body">
             <h5 class="card-title fw-bold">${this.name}</h5>
             <p class="card-text ${this.class}">${this.description}</p>

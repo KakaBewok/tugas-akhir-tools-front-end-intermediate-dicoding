@@ -1,6 +1,11 @@
+import CheckUserAuth from '../utils/check-user-auth';
+
 const Dashboard = {
   async init() {
+    CheckUserAuth.checkLoginState();
+
     await this._initialData();
+    this._loadingIndicator();
   },
 
   async _initialData() {
@@ -34,6 +39,21 @@ const Dashboard = {
                     `;
 
       cardWrapper.innerHTML += card;
+    });
+  },
+
+  _loadingIndicator() {
+    const cardImg = document.querySelector('#card-img');
+    const loadingElem = document.querySelectorAll('#loading-img');
+
+    // cardImgs.forEach((cardImg) => {
+    //   cardImg.addEventListener('load', () => {
+    //     loadingElem.forEach((elem) => elem.classList.add('d-none'));
+    //   });
+    // });
+
+    cardImg.addEventListener('load', () => {
+      loadingElem.forEach((elem) => elem.classList.add('d-none'));
     });
   },
 };
