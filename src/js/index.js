@@ -6,6 +6,7 @@ import './components/index';
 
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap';
+import './utils/firebase';
 import Dashboard from './pages/dashboard';
 import Add from './pages/add';
 import Register from './pages/register';
