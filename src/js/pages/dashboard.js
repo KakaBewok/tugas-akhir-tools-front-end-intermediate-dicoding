@@ -1,4 +1,5 @@
 import CheckUserAuth from '../utils/check-user-auth';
+import Transactions from '../network/transactions';
 
 const Dashboard = {
   async init() {
@@ -9,11 +10,14 @@ const Dashboard = {
   },
 
   async _initialData() {
-    const fetchRecords = await fetch('/data/DATA.json');
-    const responseRecords = await fetchRecords.json();
-    this._listStory = responseRecords.listStory;
-
-    this._populateListStoryCard(this._listStory);
+    try {
+      const response = await Transactions.getAll();
+      const responseRecords = response.data.listStory;
+      this._listStory = responseRecords;
+      this._populateListStoryCard(this._listStory);
+    } catch (error) {
+      console.error(error);
+    }
   },
 
   _populateListStoryCard(listStory = null) {
@@ -30,10 +34,11 @@ const Dashboard = {
     listStory.forEach((data) => {
       const { id, name, description, photoUrl } = data;
 
-      const card = `<card-story
+      const card = `
+                    <card-story 
                       id=${id}
+                      name=${name}
                       photoUrl=${photoUrl}
-                      name="${name}"
                       description="${description}"
                     ></card-story>
                     `;
@@ -42,15 +47,43 @@ const Dashboard = {
     });
   },
 
+  //edit
+  _populateDetailTransactionToModal(transactionRecord) {
+    if (!(typeof transactionRecord === 'object')) {
+      throw new Error(
+        `Parameter transactionRecord should be an object. The value is ${transactionRecord}`,
+      );
+    }
+
+    const imgDetailRecord = document.querySelector('#recordDetailModal #imgDetailRecord');
+    const typeDetailRecord = document.querySelector('#recordDetailModal #typeDetailRecord');
+    const nameDetailRecord = document.querySelector('#recordDetailModal #nameDetailRecord');
+    const dateDetailRecord = document.querySelector('#recordDetailModal #dateDetailRecord');
+    const amountDetailRecord = document.querySelector('#recordDetailModal #amountDetailRecord');
+    const descriptionDetailRecord = document.querySelector('#recordDetailModal #noteDetailRecord');
+
+    imgDetailRecord.setAttribute('src', transactionRecord.evidenceUrl);
+    imgDetailRecord.setAttribute('alt', transactionRecord.name);
+    Transactions.getEvidenceURL(transactionRecord.evidence)
+      .then((url) => {
+        imgDetailRecord.setAttribute('src', url);
+        imgDetailRecord.setAttribute('alt', transactionRecord.name);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    typeDetailRecord.textContent =
+      transactionRecord.type === 'income' ? 'Pemasukan' : 'Pengeluaran';
+    nameDetailRecord.textContent = transactionRecord.name;
+    dateDetailRecord.textContent = transactionRecord.date.toDate().toDateString();
+    amountDetailRecord.textContent = transactionRecord.amount;
+    descriptionDetailRecord.textContent = transactionRecord.description || '-';
+  },
+
   _loadingIndicator() {
     const cardImg = document.querySelector('#card-img');
     const loadingElem = document.querySelectorAll('#loading-img');
-
-    // cardImgs.forEach((cardImg) => {
-    //   cardImg.addEventListener('load', () => {
-    //     loadingElem.forEach((elem) => elem.classList.add('d-none'));
-    //   });
-    // });
 
     cardImg.addEventListener('load', () => {
       loadingElem.forEach((elem) => elem.classList.add('d-none'));

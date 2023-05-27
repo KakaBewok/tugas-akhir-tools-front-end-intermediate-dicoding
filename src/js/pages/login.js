@@ -37,8 +37,9 @@ const Login = {
         });
 
         const tokenFromResponse = response.data.loginResult.token;
-        console.log(tokenFromResponse);
+        const nameFromResponse = response.data.loginResult.name;
         Utils.setUserToken('token', tokenFromResponse);
+        Utils.setUserToken('name', nameFromResponse);
 
         window.alert('Signed user in detected');
         this._goToDashboardPage();

@@ -5,13 +5,19 @@ import Utils from '../utils/utils';
 import CheckUserAuth from '../utils/check-user-auth';
 
 class Navbar extends LitNoShadowDom {
+  static properties = {
+    userLogin: { type: String, reflect: true },
+  };
+
   constructor() {
     super();
+    this.userLogin = sessionStorage.getItem('name');
   }
 
   _userLogOut(event) {
     event.preventDefault();
     Utils.destroyUserToken('token');
+    Utils.destroyUserToken('name');
     CheckUserAuth.checkLoginState();
   }
 
@@ -35,14 +41,14 @@ class Navbar extends LitNoShadowDom {
             <li class="nav-item active">
               <a class="nav-link" href="/">Dashboard</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/add.html">Add Story</a>
-            </li>
             <li class="nav-item" id="login">
               <a class="nav-link" href="/login.html">Login</a>
             </li>
             <li class="nav-item d-none" id="logout">
-              <a class="nav-link" href="/login.html" @click=${this._userLogOut}>Logout</a>
+              <a class="nav-link" href="/login.html" @click=${this._userLogOut}
+                >Logout
+                <span class="fs-6 fw-light">(${this.userLogin ? this.userLogin : ''})</span></a
+              >
             </li>
           </ul>
         </div>

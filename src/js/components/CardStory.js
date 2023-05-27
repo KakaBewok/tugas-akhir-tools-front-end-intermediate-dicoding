@@ -12,29 +12,23 @@ class CardStory extends LitNoShadowDom {
 
   constructor() {
     super();
-
+    this.name = '';
     this.id = '';
     this.photoUrl = '';
-    this.name = '';
     this.description = '';
     this.class = 'h-100';
   }
 
   render() {
     return html`
-      <div class="grid-item ${this.class}">
+      <div class="grid-item ${this.class}" id="cards">
         <div class="card ${this.class}" style="width: 18rem id=${this.id}">
           <div class="mx-auto" id="loading-img">
             <span>Loading...</span>
           </div>
-          <img
-            src=${this.photoUrl}
-            id="card-img"
-            class="card-img-top ${this.class}"
-            alt=${this.name}
-          />
+          <img src=${this.photoUrl} id="card-img" class="card-img-top ${this.class}" alt="story" />
+          <h4 class="card-title fw-bold mt-3 ms-3">${this.name}</h4>
           <div class="card-body">
-            <h5 class="card-title fw-bold">${this.name}</h5>
             <p class="card-text ${this.class}">${this.description}</p>
           </div>
         </div>
@@ -44,3 +38,7 @@ class CardStory extends LitNoShadowDom {
 }
 
 customElements.define('card-story', CardStory);
+
+{
+  /* <button class="btn btn-primary m-3">Detail</button> */
+}

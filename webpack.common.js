@@ -49,6 +49,11 @@ module.exports = {
       filename: 'add.html',
       template: path.resolve(__dirname, 'src/views/add.html'),
     }),
+    new HtmlWebpackPlugin({
+      title: 'GuestAdd',
+      filename: 'guestadd.html',
+      template: path.resolve(__dirname, 'src/views/guestadd.html'),
+    }),
     // Auth pages
     new HtmlWebpackPlugin({
       title: 'Login',

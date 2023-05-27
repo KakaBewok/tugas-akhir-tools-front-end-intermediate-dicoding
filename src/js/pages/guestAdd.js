@@ -1,10 +1,7 @@
-import CheckUserAuth from '../utils/check-user-auth';
 import Transactions from '../network/transactions';
 
-const Add = {
+const GuestAdd = {
   async init() {
-    CheckUserAuth.checkLoginState();
-
     this._initialListener();
   },
 
@@ -36,9 +33,8 @@ const Add = {
       console.log(formData);
 
       try {
-        const response = await Transactions.store(formData);
-        window.alert('New story added successfully');
-        this._goToDashboardPage();
+        const response = await Transactions.storeAsguest(formData);
+        window.alert('New story added as Guest successfully');
       } catch (error) {
         console.error(error);
       }
@@ -78,10 +74,6 @@ const Add = {
 
     return formDataFiltered.length === 0;
   },
-
-  _goToDashboardPage() {
-    window.location.href = '/';
-  },
 };
 
-export default Add;
+export default GuestAdd;
